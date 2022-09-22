@@ -20,7 +20,7 @@ public class No_11055 {
 		for (int i = 1; i <= N; i++) {
 			for (int j = 1; j < i; j++) {
 				if (array[i] > array[j] && dp[j] + array[i] > dp[i]) { 
-                //1 ~ i-1 번째 원소들 중 i보다 작은 경우 그리고 현재 dp[i] 보다 dp[j]+1이 큰 경우 업데이트
+                //1 ~ i-1 번째 원소들 중 i보다 작은 경우 그리고 현재 dp[i] 보다 dp[j]+array[i]가 큰 경우 업데이트
 					dp[i] = dp[j] + array[i]; 
                     
 				}
