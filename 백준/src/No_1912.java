@@ -14,12 +14,12 @@ public class No_1912 {
 		for (int i = 1; i <= N; i++) {
 			array[i] = Integer.valueOf(input[i - 1]);
 		}
-		
+
 		dp[1] = array[1];
 
 		for (int i = 1; i <= N; i++) {
 			dp[i] = array[i] + dp[i - 1];
-			if (dp[i] <= 0) {
+			if (dp[i] < 0) {
 
 				dp[i] = 0;
 			}
