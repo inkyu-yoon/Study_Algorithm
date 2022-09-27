@@ -12,7 +12,7 @@ public class No_1699 {
 				dp[i] = Math.min(dp[i - j * j] + 1, dp[i]);
 			}
 		}
-		System.out.println(Arrays.toString(dp));
+//		System.out.println(Arrays.toString(dp));
 		System.out.println(dp[input]);
 	}
 }
