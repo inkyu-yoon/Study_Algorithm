@@ -6,16 +6,16 @@ public class No_2133 {
 		Scanner scanner = new Scanner(System.in);
 		int N = scanner.nextInt();
 		long [] dp = new long [N+2];
-		dp[0] = 1; //각 케이스마다 존재하는 예외상황 2개
 		dp[2] = 3;
-		for(int i=4;i<=N;i+=2) {
-			dp[i]+=dp[i-2]*dp[2];
-			for(int j=0;j<=i-4;j+=2) {
-				dp[i]+=2*dp[j];
+		for(int n=4;n<=N;n+=2) {
+			dp[n]+=dp[n-2]*dp[2];
+			for(int j=2;j<=n-4;j+=2) {
+				dp[n]+=2*dp[j];
 			}
+			dp[n]+=2;
 		}
 		
 		System.out.println(dp[N]);
-		System.out.println(Arrays.toString(dp));
+//		System.out.println(Arrays.toString(dp));
 	}
 }
