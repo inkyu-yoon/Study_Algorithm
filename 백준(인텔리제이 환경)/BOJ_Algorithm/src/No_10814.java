@@ -9,7 +9,6 @@ public class No_10814 {
     public static void main(String[] args) throws IOException {
         //회원들의 나이가 증가하는 순으로
         // 나이가 같다면 먼저 가입한 사람이 앞에 오는 순으로
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.valueOf(br.readLine());
         List<Member> memberList = new ArrayList<>();
