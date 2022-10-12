@@ -1,3 +1,5 @@
+package 정렬;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,7 +20,7 @@ public class No_10814 {
             memberList.add(new Member(Integer.valueOf(input[0]), input[1],i));
         }
 
-//        for (Member member : memberList) {
+//        for (정렬.Member member : memberList) {
 //            System.out.println("member = " + member);
 //        }
         Collections.sort(memberList);

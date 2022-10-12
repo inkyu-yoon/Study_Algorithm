@@ -1,3 +1,5 @@
+package 정렬;
+
 import java.io.*;
 
 public class No_10989_2 {
