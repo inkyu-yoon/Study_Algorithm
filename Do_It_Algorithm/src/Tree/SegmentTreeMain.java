@@ -1,22 +1,34 @@
 package Tree;
 
+import java.util.Arrays;
+
 public class SegmentTreeMain {
+    public static void main(String[] args) {
+        long[] arr = {1L, 2L, 3L, 4L, 5L, 6L};
+        SegmentTree segmentTree = new SegmentTree(arr);
+        System.out.println(Arrays.toString(segmentTree.tree));
+        long sum = segmentTree.sum(1, 0, 5, 2, 5);
+        System.out.println(sum);
+        segmentTree.update(1,0,5,1,3L);
+        System.out.println(Arrays.toString(segmentTree.tree));
+    }
     static class SegmentTree {
         //트리 데이터를 저장할 배열
         long tree[];
-        int treeSize;
 
-        SegmentTree(int arrSize) {
+        SegmentTree(long [] arr) {
             //트리 높이 계산
             //Math.log 는 밑이 10인 자연로그 이므로 Math.log(2) 로 한번 더 나누어준다.
             // 구간합을 나타내는 세그먼트 트리의 경우 높이는 (log2(N))을 올림한 값이 된다. (예시로 설명 가능)
+            int arrSize = arr.length;
             int h = (int) Math.ceil(Math.log(arrSize) / Math.log(2));
 
             //트리 노드 수 계산
-            this.treeSize = (int) Math.pow(2, h + 1);
+            int treeSize = (int) Math.pow(2, h + 1);
 
-            //트리사이즈로 트리 생성
+            //트리사이즈로 트리 생성하고 입력된 배열로 초기 트리 생성
             tree = new long[treeSize];
+            init(arr,1,0,arrSize-1);
         }
 
 
@@ -31,9 +43,10 @@ public class SegmentTreeMain {
             if (start == end) { //같아지는 순간 데이터를 집어 넣는다.
                 return tree[nodeIndex] = arr[start];
             } else { // 리프 노드를 제외한 노드에는 아래 구문에 의해, 구간 합이 저장될 것이다.
+                int midPoint = (start+end)/2;
                 return tree[nodeIndex] =
-                        init(arr, nodeIndex * 2, start, (start + end) / 2)
-                                + init(arr, nodeIndex * 2 + 1, (start + end) / 2 + 1, end);
+                        init(arr, nodeIndex * 2, start, midPoint)
+                                + init(arr, nodeIndex * 2 + 1, midPoint + 1, end);
 
             }
         }
@@ -48,11 +61,11 @@ public class SegmentTreeMain {
             //바꾸려는 데이터에 diff를 더해주면 값이 적용 됨
             tree[nodeIndex] += diff;
 
-            if (start != end) { //리프 노드가 아닌 경우
+            if (start != end) { //리프 노드가 아닌 경우 구간 합에 반영 시켜주어야 함
 
-
-                update(nodeIndex*2, start, (start+end)/2, index, diff);
-                update(nodeIndex*2+1, (start+end)/2+1, end, index, diff);
+                int midPoint = (start+end)/2;
+                update(nodeIndex*2, start, midPoint, index, diff);
+                update(nodeIndex*2+1, midPoint+1, end, index, diff);
 
             }
         }
@@ -64,13 +77,15 @@ public class SegmentTreeMain {
             }
 
             // 범위 내 완전히 포함 시에는 더 내려가지 않고 바로 리턴
+            //left 랑 right 는 우리가 구하고자 하는 구간이라 고정
+            //start~end 는 구간합 즉 left<+start ~ end<=right 를 만족하면 값을 반환하면 됨
             if(left <= start && end <= right){
                 return tree[node_idx];
             }
-
             // 그 외의 경우 좌 / 우측으로 지속 탐색 수행
-            return sum(node_idx*2, start, (start+end)/2, left, right)+
-                    sum(node_idx*2+1, (start+end)/2+1, end, left, right);
+            int midPoint = (start + end) / 2;
+            return sum(node_idx*2, start, midPoint, left, right)+
+                    sum(node_idx*2+1, midPoint+1, end, left, right);
         }
     }
 }
