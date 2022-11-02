@@ -9,7 +9,7 @@ class Graph{
         int data;
 
         //인접한 노드들 과의 관계
-        LinkedList<Node> adjacent;
+        LinkedList<Node> neighbor;
 
         //방문했는지 마킹
         boolean marked;
@@ -18,7 +18,7 @@ class Graph{
         Node(int data) {
             this.data = data;
             this.marked = false;
-            adjacent = new LinkedList<>();
+            neighbor = new LinkedList<>();
         }
     }
 
@@ -38,11 +38,11 @@ class Graph{
         Node n2 = nodes[i2];
 
         //인접한 관계에 있는 노드들을 서로 추가해준다.
-        if (!n1.adjacent.contains(n2)) {
-            n1.adjacent.add(n2);
+        if (!n1.neighbor.contains(n2)) {
+            n1.neighbor.add(n2);
         }
-        if (!n2.adjacent.contains(n1)) {
-            n2.adjacent.add(n1);
+        if (!n2.neighbor.contains(n1)) {
+            n2.neighbor.add(n1);
         }
 
     }
@@ -65,7 +65,7 @@ class Graph{
             Node r = stack.pop();
 
             //출력한 노드와 인접한 노드를 살펴본다.
-            for (Node n : r.adjacent) {
+            for (Node n : r.neighbor) {
                 //만약 인접한 노드에 방문을 아직 안한 상황이라면, 마킹 표시를 하고 스택에 넣는다.
                 if (n.marked == false) {
                     n.marked = true;
@@ -87,7 +87,7 @@ class Graph{
         r.marked = true;
         System.out.print(r.data+" ");
 
-        for (Node n : r.adjacent) {
+        for (Node n : r.neighbor) {
             if (n.marked == false) {
                 dfsR(n);
             }
@@ -110,7 +110,7 @@ class Graph{
         //큐가 완전히 비게될 때 까지 수행
         while (!queue.isEmpty()) {
             Node r = queue.poll();
-            for (Node n : r.adjacent) {
+            for (Node n : r.neighbor) {
                 if (n.marked == false) {
                     n.marked = true;
                     queue.add(n);
@@ -123,22 +123,17 @@ class Graph{
 
 public class DfsAndBfs {
     public static void main(String[] args) {
-        Graph g = new Graph(9);
-        g.addEdge(0, 1);
+        Graph g = new Graph(5);
         g.addEdge(1, 2);
         g.addEdge(1, 3);
+        g.addEdge(1, 4);
         g.addEdge(2, 4);
-        g.addEdge(2, 3);
         g.addEdge(3, 4);
-        g.addEdge(3, 5);
-        g.addEdge(5, 6);
-        g.addEdge(5, 7);
-        g.addEdge(6, 8);
-        g.dfs(0);
+//        g.dfs(1);
         System.out.println();
-        g.dfsR(0);
-        System.out.println();
-        g.bfs(0);
+//        g.dfsR(0);
+//        System.out.println();
+        g.bfs(1);
     }
 
 }
