@@ -17,7 +17,6 @@ public class No_10451 {
     public static void main(String[] args) throws IOException {
         //순열로 존재하는 사이클 갯수 구하기
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int T = Integer.valueOf(br.readLine());
 
         while (T-- > 0) {
@@ -52,6 +51,7 @@ public class No_10451 {
             }
             System.out.println(count);
         }
+
     }
 
     static void dfs(int start) {
