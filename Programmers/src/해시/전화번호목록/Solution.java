@@ -2,23 +2,23 @@ package 해시.전화번호목록;
 
 import java.util.*;
 
-public class Solution {
+class Solution {
+    //어떤 번호가 다른 번호의 접두어인 경우가 있으면 false를 출력
     public boolean solution(String[] phone_book) {
         boolean answer = true;
-        Map<String, Integer> map = new HashMap<>();
+        Map<String,Integer> numbers = new HashMap<>();
 
-        //전화번호를 일단 map에 다 집어 넣는다.
-        for (String s : phone_book) {
-            map.put(s, 1);
+        //전화번호 부 모든 번호를 Map에 저장
+        for(String phone : phone_book){
+            numbers.put(phone,1);
         }
 
-        //다시 전화번호 하나씩, 각 전화번호 길이의 -1 만큼 substring해서 이미 키로 등록되어있는지 확인해본다.
-        //substring(a,b) 는 a이상 b미만
-        for (int i = 0; i < phone_book.length; i++) {
-            for (int j = 1; j < phone_book[i].length(); j++) {
-                System.out.println(j);
-                System.out.println("phone_book[i].substring(0, j) = " + phone_book[i].substring(0, j));
-                if (map.containsKey(phone_book[i].substring(0, j))) {
+        //전화번호부에 있는 전화번호를 쪼개서 map에 저장되어있는지 확인
+        for(String number : numbers.keySet()){
+            //0이상 1 ~ length-1미만 까지 쪼개봐야한다.
+            for(int i=1;i<=number.length()-1;i++){
+                //쪼갠 번호가 map에 저장되어 있는 경우, 접두어가 되는 번호가 존재한다는 의미
+                if(numbers.containsKey(number.substring(0,i))){
                     return false;
                 }
             }
