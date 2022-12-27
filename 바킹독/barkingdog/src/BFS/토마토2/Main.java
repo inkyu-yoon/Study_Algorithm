@@ -46,14 +46,12 @@ public class Main {
             day[f] = tomatoDay;
         }
 
-        bfs();
+        System.out.println(bfs());
 
-        System.out.println(Arrays.deepToString(day[0]));
-        System.out.println(Arrays.deepToString(day[1]));
 
     }
 
-    static void bfs() {
+    static int bfs() {
         while (!q.isEmpty()) {
             int[] point = q.poll();
 
@@ -75,7 +73,19 @@ public class Main {
                 }
             }
         }
+        int ans = 0;
+        for (int f = 0; f < floor; f++) {
 
+            for (int r = 0; r < row; r++) {
+                for (int c = 0; c < column; c++) {
+                    if (day[f][r][c] == 0 && map[f][r][c]==0) {
+                        return -1;
+                    }
+                    ans = Math.max(day[f][r][c], ans);
+                }
+            }
+        }
+        return ans;
     }
 }
 /*
