@@ -1,4 +1,4 @@
-package 판교가는길.dfs;
+package 판교가는길.dfs.안전영역;
 
 import java.io.BufferedReader;
 import java.io.IOException;
