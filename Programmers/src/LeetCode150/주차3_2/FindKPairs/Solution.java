@@ -13,11 +13,13 @@ class Solution {
 
         while (!pq.isEmpty() && k-- > 0) {
             int[] poll = pq.poll();
-            ans.add(List.of(poll[0], poll[1]));
+            int num1 = poll[0], num2 = poll[1];
+            ans.add(List.of(num1, num2));
 
             int idx1 = poll[2];
             if (idx1 + 1 < nums1.length) {
-                pq.offer(new int[]{nums1[idx1 + 1], poll[1], idx1 + 1, nums1[idx1 + 1] + poll[1]});
+                // num2와 제거한 num1 뒤에 있는 수의 조합을 추가
+                pq.offer(new int[]{nums1[idx1 + 1], num2, idx1 + 1, nums1[idx1 + 1] + num2});
             }
         }
 
