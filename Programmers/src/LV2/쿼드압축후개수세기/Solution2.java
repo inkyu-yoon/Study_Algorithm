@@ -1,4 +1,4 @@
-class Solution {
+class Solution2 {
     int totalOne = 0;
     int totalZero = 0;
     public int[] solution2(int[][] arr) {
